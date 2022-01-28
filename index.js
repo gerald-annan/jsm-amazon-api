@@ -11,7 +11,7 @@ const returnScraperApiUrl = (apiKey) => `http://api.scraperapi.com?api_key=${api
 
 // Welcome route
 app.get('/', async (req, res) => {
-    res.send('Welcome to Amazon Scraper API!');
+    res.send('Welcome Julian!');
 });
 
 // Get product details
@@ -20,7 +20,7 @@ app.get('jul-api-v1/products/:productId', async (req, res) => {
     const api_key = key;
 
     try {
-        const productTerm = productId.split().join("+");
+        const productTerm = productId.replace("%", "+");
         // const response = await request(`${returnScraperApiUrl(api_key)}&url=https://www.amazon.com/dp/${productId}`);
         const response = await request(`${returnScraperApiUrl(api_key)}&url=https://www.amazon.com/s?k=${productTerm}`)
         res.json(JSON.parse(response));
