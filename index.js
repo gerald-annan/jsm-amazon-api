@@ -15,6 +15,22 @@ app.get('/', async (req, res) => {
 });
 
 // Get product details
+app.get('/products/:productId', async (req, res) => {
+    const { productId } = req.params;
+    const api_key = key;
+
+    try {
+        const productTerm = productId.replace("%", "+");
+        console.log(productTerm);
+        // const response = await request(`${returnScraperApiUrl(api_key)}&url=https://www.amazon.com/dp/${productId}`);
+        const response = await request(`${returnScraperApiUrl(api_key)}&url=https://www.amazon.com/s?k=${productTerm}`)
+        res.json(JSON.parse(response));
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+// Get product reviews
 
 
 app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`));
